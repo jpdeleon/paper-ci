@@ -1,7 +1,8 @@
 #build .tex which depends on .png
-paper.pdf: paper.tex plot-data.png
+paper.pdf: paper.tex figures/plot-data.png
+	#pdflatex -interaction=nonstopmode -halt-on-error  paper.tex
 	pdflatex paper.tex
 
 #run .py with .dat and output as .png
-plot-%.png: %.dat plot.py
-	./plot.py -i $*.dat -o $@
+figures/plot-data.png: figures/data.dat figures/plot.py
+	cd $(<D);python plot.py -i data.dat -o plot-data.png
